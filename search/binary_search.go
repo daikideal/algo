@@ -1,10 +1,6 @@
-package main
+package search
 
-import (
-	"fmt"
-)
-
-func binarySearchIterative(numbers []int, value int) (index int) {
+func BinarySearchIterative(numbers []int, value int) (index int) {
 	left, right := 0, len(numbers)-1
 
 	for left < right {
@@ -22,7 +18,7 @@ func binarySearchIterative(numbers []int, value int) (index int) {
 	return -1
 }
 
-func binarySearchRecursive(numbers []int, value int) (index int) {
+func BinarySearchRecursive(numbers []int, value int) (index int) {
 	var bsr func(numbers []int, value int, left int, right int) (index int)
 	bsr = func(numbers []int, value int, left int, right int) (index int) {
 		if left > right {
@@ -40,11 +36,4 @@ func binarySearchRecursive(numbers []int, value int) (index int) {
 	}
 
 	return bsr(numbers, value, 0, len(numbers)-1)
-}
-
-func main() {
-	numbers := []int{0, 1, 3, 4, 5, 7, 10, 13}
-
-	fmt.Println(binarySearchIterative(numbers, 10))
-	fmt.Println(binarySearchRecursive(numbers, 10))
 }
