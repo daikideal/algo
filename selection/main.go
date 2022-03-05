@@ -5,7 +5,7 @@ import (
 	"math/rand"
 )
 
-func selectionSort(numbers []int) []int {
+func SelectionSort(numbers []int) []int {
 	len_numbers := len(numbers)
 
 	for i := 0; i < len_numbers; i++ {
@@ -27,5 +27,5 @@ func main() {
 		numbers[i] = rand.Intn(100)
 	}
 
-	fmt.Println(selectionSort(numbers))
+	fmt.Println(SelectionSort(numbers))
 }

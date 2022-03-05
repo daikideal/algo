@@ -9,7 +9,7 @@ import (
 //
 // リストの長さが2以上の場合、リストを2つに分割する。
 // 分割したリストをマージ処理へと渡す。
-func mergeSort(numbers []int) []int {
+func MergeSort(numbers []int) []int {
 	if len(numbers) < 2 {
 		return numbers
 	}
@@ -18,7 +18,7 @@ func mergeSort(numbers []int) []int {
 	left := numbers[:center]
 	right := numbers[center:]
 
-	left, right = mergeSort(left), mergeSort(right)
+	left, right = MergeSort(left), MergeSort(right)
 
 	return merge(left, right)
 }
@@ -58,5 +58,5 @@ func main() {
 		numbers[i] = rand.Intn(100)
 	}
 
-	fmt.Println(mergeSort(numbers))
+	fmt.Println(MergeSort(numbers))
 }

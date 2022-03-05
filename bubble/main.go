@@ -5,7 +5,7 @@ import (
 	"math/rand"
 )
 
-func bubbleSort(numbers []int) []int {
+func BubbleSort(numbers []int) []int {
 	len_numbers := len(numbers)
 
 	for i := 0; i < len_numbers; i++ {
@@ -25,5 +25,5 @@ func main() {
 		numbers[i] = rand.Intn(100)
 	}
 
-	fmt.Println(bubbleSort(numbers))
+	fmt.Println(BubbleSort(numbers))
 }

@@ -8,7 +8,7 @@ import (
 // クイックソート
 //
 // ソート処理を実行する範囲を特定して分割関数を再帰的に呼び出す。
-func quickSort(numbers []int) []int {
+func QuickSort(numbers []int) []int {
 	var _quickSort func(numbers []int, low int, high int)
 	_quickSort = func(numbers []int, low int, high int) {
 		if low < high {
@@ -48,5 +48,5 @@ func main() {
 		numbers[i] = rand.Intn(100)
 	}
 
-	fmt.Println(quickSort(numbers))
+	fmt.Println(QuickSort(numbers))
 }
