@@ -1,4 +1,4 @@
-package main
+package list
 
 import (
 	"fmt"
@@ -93,22 +93,4 @@ func (list LinkedList) Print() {
 	}
 
 	return
-}
-
-func main() {
-	list := new(LinkedList)
-	list.Append(1)
-	list.Append(2)
-	list.Insert(3)
-	list.Print()
-
-	fmt.Println("==> Reversing...")
-	list.Reverse()
-	list.Print()
-
-	fmt.Println("==> Deleting...")
-	list.Remove(2)
-	list.Print()
-	list.Remove(5) // 何も起きない
-	list.Print()
 }
