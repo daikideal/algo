@@ -1,9 +1,4 @@
-package main
-
-import (
-	"fmt"
-	"math/rand"
-)
+package sort
 
 // クイックソート
 //
@@ -40,13 +35,4 @@ func partition(numbers []int, low int, high int) int {
 	numbers[i+1], numbers[high] = numbers[high], numbers[i+1]
 
 	return (i + 1)
-}
-
-func main() {
-	numbers := make([]int, 10)
-	for i := range numbers {
-		numbers[i] = rand.Intn(100)
-	}
-
-	fmt.Println(QuickSort(numbers))
 }

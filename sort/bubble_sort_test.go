@@ -1,21 +1,8 @@
-package main
+package sort
 
 import (
-	"math/rand"
 	"testing"
-	"time"
 )
-
-func RandomNumbers(length int) []int {
-	rand.Seed(time.Now().UnixNano())
-
-	numbers := make([]int, length)
-	for i := range numbers {
-		numbers[i] = rand.Intn(100)
-	}
-
-	return numbers
-}
 
 func TestBubbleSort(t *testing.T) {
 	list := RandomNumbers(10)

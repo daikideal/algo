@@ -1,9 +1,4 @@
-package main
-
-import (
-	"fmt"
-	"math/rand"
-)
+package sort
 
 func SelectionSort(numbers []int) []int {
 	len_numbers := len(numbers)
@@ -19,13 +14,4 @@ func SelectionSort(numbers []int) []int {
 	}
 
 	return numbers
-}
-
-func main() {
-	numbers := make([]int, 10)
-	for i := range numbers {
-		numbers[i] = rand.Intn(100)
-	}
-
-	fmt.Println(SelectionSort(numbers))
 }

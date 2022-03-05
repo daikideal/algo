@@ -1,9 +1,4 @@
-package main
-
-import (
-	"fmt"
-	"math/rand"
-)
+package sort
 
 func BubbleSort(numbers []int) []int {
 	len_numbers := len(numbers)
@@ -17,13 +12,4 @@ func BubbleSort(numbers []int) []int {
 	}
 
 	return numbers
-}
-
-func main() {
-	numbers := make([]int, 10)
-	for i := range numbers {
-		numbers[i] = rand.Intn(100)
-	}
-
-	fmt.Println(BubbleSort(numbers))
 }

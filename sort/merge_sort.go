@@ -1,9 +1,4 @@
-package main
-
-import (
-	"fmt"
-	"math/rand"
-)
+package sort
 
 // マージソート
 //
@@ -50,13 +45,4 @@ func merge(left []int, right []int) []int {
 	}
 
 	return result
-}
-
-func main() {
-	numbers := make([]int, 10)
-	for i := range numbers {
-		numbers[i] = rand.Intn(100)
-	}
-
-	fmt.Println(MergeSort(numbers))
 }
