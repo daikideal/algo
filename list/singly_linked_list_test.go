@@ -64,3 +64,61 @@ func TestInsert(t *testing.T) {
 		})
 	}
 }
+
+func TestRemove(t *testing.T) {
+	pattern := map[string]struct {
+		NodeValues []interface{}
+		inData     interface{}
+	}{
+		"When passed value is in list": {
+			NodeValues: []interface{}{1, 2, 3},
+			inData:     1,
+		},
+		"When passed value is not in list": {
+			NodeValues: []interface{}{2, 3, 4},
+			inData:     1,
+		},
+		"When list has no value": {
+			NodeValues: []interface{}{},
+			inData:     1,
+		},
+	}
+
+	for k, v := range pattern {
+		list := newLinkedList(v.NodeValues)
+
+		t.Run(k, func(t *testing.T) {
+			list.Remove(v.inData)
+
+			actual := list.Head
+			for actual != nil && actual.Next != nil {
+				if actual.Data == v.inData {
+					t.Errorf("Expected {%v} is deleted, but actual member: {%v}", v.inData, actual)
+				}
+
+				actual = actual.Next
+			}
+		})
+	}
+}
+
+func newLinkedList(nodeValues []interface{}) *LinkedList {
+	list := new(LinkedList)
+
+	for i := range nodeValues {
+		newNode := &Node{Data: nodeValues[i]}
+
+		if list.Head == nil {
+			list.Head = newNode
+			continue
+		}
+
+		lastNode := list.Head
+		for lastNode.Next != nil {
+			lastNode = lastNode.Next
+		}
+		lastNode.Next = newNode
+	}
+
+	return list
+}
