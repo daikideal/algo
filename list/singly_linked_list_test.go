@@ -102,6 +102,39 @@ func TestRemove(t *testing.T) {
 	}
 }
 
+func TestReverse(t *testing.T) {
+	pattern := map[string]struct {
+		NodeValues  []interface{}
+		expectOrder []interface{}
+	}{
+		"When numbers are ordered by desc": {
+			NodeValues:  []interface{}{1, 2, 3, 4, 5},
+			expectOrder: []interface{}{5, 4, 3, 2, 1},
+		},
+		"When chars are ordered by desc": {
+			NodeValues:  []interface{}{"あ", "い", "う", "え", "お"},
+			expectOrder: []interface{}{"お", "え", "う", "い", "あ"},
+		},
+	}
+
+	for k, v := range pattern {
+		list := newLinkedList(v.NodeValues)
+
+		t.Run(k, func(t *testing.T) {
+			list.Reverse()
+			actual := list.Head
+
+			for i := 0; i < len(v.expectOrder); i++ {
+				if actual.Data != v.expectOrder[i] {
+					t.Errorf("Expected value is %v, but actual is %v", v.expectOrder[i], actual)
+				}
+
+				actual = actual.Next
+			}
+		})
+	}
+}
+
 func newLinkedList(nodeValues []interface{}) *LinkedList {
 	list := new(LinkedList)
 
