@@ -1,4 +1,4 @@
-package list
+package linked_list
 
 import (
 	"testing"
@@ -6,21 +6,21 @@ import (
 
 func TestAppend(t *testing.T) {
 	pattern := map[string]struct {
-		setListValue []interface{}
-		inData       interface{}
+		setListValues []interface{}
+		inData        interface{}
 	}{
-		"When head is nil, should set value to head": {
-			setListValue: nil,
-			inData:       1,
+		"When list has no value, should set head of list": {
+			setListValues: nil,
+			inData:        1,
 		},
-		"When head is not nil, should set value to last": {
-			setListValue: []interface{}{1, 2, 3},
-			inData:       4,
+		"When list has values, should set last": {
+			setListValues: []interface{}{1, 2, 3, 4},
+			inData:        5,
 		},
 	}
 
 	for k, v := range pattern {
-		list := newLinkedList(v.setListValue)
+		list := newDoublyLinkedList(v.setListValues)
 
 		t.Run(k, func(t *testing.T) {
 			list.Append(v.inData)
@@ -31,7 +31,7 @@ func TestAppend(t *testing.T) {
 			}
 
 			if actual.Data != v.inData {
-				t.Errorf("Expected is {%v}, but actual is {%v}", v.inData, actual)
+				t.Errorf("Expected %v, but actual %v", v.inData, actual.Data)
 			}
 		})
 	}
@@ -39,28 +39,28 @@ func TestAppend(t *testing.T) {
 
 func TestInsert(t *testing.T) {
 	pattern := map[string]struct {
-		setListValue []interface{}
-		inData       interface{}
+		setListValues []interface{}
+		inData        interface{}
 	}{
-		"When list is blank, should set value to head": {
-			setListValue: nil,
-			inData:       1,
+		"When list has no value, should set head of list": {
+			setListValues: nil,
+			inData:        1,
 		},
-		"When list has values, should set value to head": {
-			setListValue: []interface{}{1, 2, 3, 4},
-			inData:       5,
+		"When list has values, should set head of list": {
+			setListValues: []interface{}{1, 2, 3, 4},
+			inData:        5,
 		},
 	}
 
 	for k, v := range pattern {
-		list := new(LinkedList)
+		list := newDoublyLinkedList(v.setListValues)
 
 		t.Run(k, func(t *testing.T) {
 			list.Insert(v.inData)
 
-			actual := list.Head.Data
-			if actual != v.inData {
-				t.Errorf("Expected is {%v}, but actual is %v", v.inData, actual)
+			actual := list.Head
+			if actual.Data != v.inData {
+				t.Errorf("Expected %v, but actual %v", v.inData, actual.Data)
 			}
 		})
 	}
@@ -71,30 +71,30 @@ func TestRemove(t *testing.T) {
 		setListValue []interface{}
 		inData       interface{}
 	}{
-		"When passed value is in list": {
-			setListValue: []interface{}{1, 2, 3},
+		"When list head equals input value, should remove it": {
+			setListValue: []interface{}{1, 2, 3, 4, 5},
 			inData:       1,
 		},
-		"When passed value is not in list": {
-			setListValue: []interface{}{2, 3, 4},
-			inData:       1,
+		"When list has input value, should remove it": {
+			setListValue: []interface{}{1, 2, 3, 4, 5},
+			inData:       3,
 		},
-		"When list has no value": {
-			setListValue: []interface{}{},
-			inData:       1,
+		"When list does not have input value, should do nothing": {
+			setListValue: []interface{}{1, 2, 3, 4, 5},
+			inData:       6,
 		},
 	}
 
 	for k, v := range pattern {
-		list := newLinkedList(v.setListValue)
+		list := newDoublyLinkedList(v.setListValue)
 
 		t.Run(k, func(t *testing.T) {
 			list.Remove(v.inData)
 
 			actual := list.Head
-			for actual != nil && actual.Next != nil {
+			for actual.Next != nil {
 				if actual.Data == v.inData {
-					t.Errorf("Expected {%v} is deleted, but actual member: {%v}", v.inData, actual)
+					t.Errorf("%v is should not found", v.inData)
 				}
 
 				actual = actual.Next
@@ -119,7 +119,7 @@ func TestReverse(t *testing.T) {
 	}
 
 	for k, v := range pattern {
-		list := newLinkedList(v.setListValue)
+		list := newDoublyLinkedList(v.setListValue)
 
 		t.Run(k, func(t *testing.T) {
 			list.Reverse()
@@ -136,22 +136,23 @@ func TestReverse(t *testing.T) {
 	}
 }
 
-func newLinkedList(nodeValues []interface{}) *LinkedList {
-	list := new(LinkedList)
+func newDoublyLinkedList(values []interface{}) *DoublyLinkedList {
+	list := new(DoublyLinkedList)
 
-	for i := range nodeValues {
-		newNode := &Node{Data: nodeValues[i]}
+	for i := range values {
+		newNode := &Node{Data: values[i]}
 
 		if list.Head == nil {
 			list.Head = newNode
 			continue
 		}
 
-		lastNode := list.Head
-		for lastNode.Next != nil {
-			lastNode = lastNode.Next
+		currentNode := list.Head
+		for currentNode.Next != nil {
+			currentNode = currentNode.Next
 		}
-		lastNode.Next = newNode
+		currentNode.Next = newNode
+		newNode.Prev = currentNode
 	}
 
 	return list

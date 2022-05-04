@@ -1,10 +1,10 @@
-package list
+package linked_list
 
 import (
 	"fmt"
 )
 
-type LinkedList struct {
+type SinglyLinkedList struct {
 	Head *Node
 }
 
@@ -14,7 +14,7 @@ type Node struct {
 }
 
 // リストの終端にデータを追加する
-func (list *LinkedList) Append(data interface{}) {
+func (list *SinglyLinkedList) Append(data interface{}) {
 	newNode := &Node{Data: data}
 
 	if list.Head == nil {
@@ -31,7 +31,7 @@ func (list *LinkedList) Append(data interface{}) {
 }
 
 // リストの先端にデータを追加する
-func (list *LinkedList) Insert(data interface{}) {
+func (list *SinglyLinkedList) Insert(data interface{}) {
 	newNode := &Node{Data: data}
 	newNode.Next = list.Head
 
@@ -40,7 +40,7 @@ func (list *LinkedList) Insert(data interface{}) {
 }
 
 // 引数と最初に一致したデータをリストから削除する
-func (list *LinkedList) Remove(data interface{}) {
+func (list *SinglyLinkedList) Remove(data interface{}) {
 	currentNode := list.Head
 
 	if currentNode != nil && currentNode.Data == data {
@@ -64,7 +64,7 @@ func (list *LinkedList) Remove(data interface{}) {
 	return
 }
 
-func (list *LinkedList) Reverse() {
+func (list *SinglyLinkedList) Reverse() {
 	previousNode := new(Node)
 	currentNode := list.Head
 
@@ -84,7 +84,7 @@ func (list *LinkedList) Reverse() {
 }
 
 // リスト内のデータを全て出力する
-func (list LinkedList) Print() {
+func (list SinglyLinkedList) Print() {
 	currentNode := list.Head
 
 	for currentNode != nil {
