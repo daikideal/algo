@@ -1,4 +1,4 @@
-package main
+package doubly_linked_list
 
 import (
 	"fmt"
@@ -52,8 +52,8 @@ func (list *DoublyLinkedList) Remove(data interface{}) {
 	currentNode := list.Head
 
 	if currentNode != nil && currentNode.Data == data {
-		currentNode = nil
 		list.Head = currentNode.Next
+		currentNode = nil
 		return
 	}
 
@@ -108,20 +108,4 @@ func (list DoublyLinkedList) Print() {
 	}
 
 	return
-}
-
-func main() {
-	list := new(DoublyLinkedList)
-	list.Append(4)
-	list.Append(5)
-	list.Append(6)
-	list.Print()
-
-	fmt.Println("==> Reversing...")
-	list.Reverse()
-	list.Print()
-
-	fmt.Println("==> Deleting...")
-	list.Remove(5)
-	list.Print()
 }
