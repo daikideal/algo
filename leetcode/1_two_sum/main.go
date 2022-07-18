@@ -1,9 +1,5 @@
 package main
 
-import (
-	"fmt"
-)
-
 // GOOD: Using Hash
 func twoSum(nums []int, target int) []int {
 	memo := make(map[int]int, len(nums))
@@ -41,19 +37,3 @@ func twoSum(nums []int, target int) []int {
 
 // 	return ans
 // }
-
-func main() {
-	pattern := []struct {
-		nums   []int
-		target int
-	}{
-		{nums: []int{2, 7, 11, 15}, target: 9},
-		{nums: []int{3, 2, 4}, target: 6},
-		{nums: []int{3, 3}, target: 6},
-	}
-
-	for _, v := range pattern {
-		fmt.Printf("input: %v, output: %v", v, twoSum(v.nums, v.target))
-		fmt.Println()
-	}
-}
